@@ -1,6 +1,5 @@
 # Ai-Clinical-Conversation-Intelligence-System
 Healthcare analytics and patient management system with AI-driven clinical intelligence, patient tracking, and data analytics capabilities.
-# AI Clinical Conversation Intelligence System
 
 ## Project Overview
 A healthcare analytics and patient management platform designed to support patient registration, pain assessment, consultation tracking, treatment management, progress monitoring, and future AI-powered clinical conversation intelligence.
