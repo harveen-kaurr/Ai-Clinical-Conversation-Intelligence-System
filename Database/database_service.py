@@ -1,4 +1,4 @@
-from Database.supabase_client import supabase
+from database.supabase_client import supabase
 
 
 class DatabaseService:
