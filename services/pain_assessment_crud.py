@@ -1,5 +1,5 @@
-from Database.supabase_client import supabase
-from Database.database_service import DatabaseService
+from database.supabase_client import supabase
+from database.database_service import DatabaseService
 
 def get_all_assessments():
 
