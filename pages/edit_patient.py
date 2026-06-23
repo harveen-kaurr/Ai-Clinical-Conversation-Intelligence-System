@@ -127,10 +127,11 @@ def show_edit_patient_page():
                     occupation
             }
 
-            result = update_patient(
-                patient_id,
-                updated_data
-            )
+            with st.spinner("Updating patient..."):
+                result = update_patient(
+                    patient_id,
+                    updated_data
+                )
 
             if result:
 

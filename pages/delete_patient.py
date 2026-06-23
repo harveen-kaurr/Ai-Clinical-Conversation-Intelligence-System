@@ -64,10 +64,10 @@ def show_delete_patient_page():
         )
 
         confirm = st.checkbox("I confirm deletion")
-
         if confirm and st.button("Delete Patient"):
 
-            result = delete_patient(
+            with st.spinner("Deleting patient..."):
+                result = delete_patient(
                 patient["patient_id"]
             )
 
