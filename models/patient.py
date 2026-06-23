@@ -24,12 +24,12 @@ class PatientBase(BaseModel):
 
     phone_number: str = Field(
         ...,
-        pattern=r"^\d{10,15}$"
+        pattern=r"^[6-9]\d{9}$"
     )
 
     alternate_phone_number: Optional[str] = Field(
         None,
-        pattern=r"^\d{10,15}$"
+        pattern=r"^[6-9]\d{9}$"
     )
 
     email: Optional[str] = Field(
@@ -77,7 +77,7 @@ class PatientBase(BaseModel):
 
     emergency_contact: Optional[str] = Field(
         None,
-        pattern=r"^\d{10,15}$"
+        pattern=r"^[6-9]\d{9}$"
     )
 
     lifestyle: Optional[str] = Field(

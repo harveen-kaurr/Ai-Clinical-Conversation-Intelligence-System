@@ -4,6 +4,7 @@ from utils.bmi_calc import get_bmi_data
 from utils.validation import (
     validate_age,
     validate_email,
+    validate_emergency_contact,
     validate_gender,
     validate_phone_number,
     validate_alternate_phone_number,
@@ -17,12 +18,6 @@ class PatientService:
         "age",
         "phone_number"
     ]
-
-    @staticmethod
-    def generate_patient_id(sequence: int) -> str:
-        year = datetime.now().year
-        return f"PAT-{year}-{sequence:04d}"
-
     @staticmethod
     def validate_patient(
         patient_data: dict,
@@ -75,6 +70,13 @@ class PatientService:
         if not valid:
             raise ValueError(message)
 
+        valid, message = validate_emergency_contact(
+            patient_data.get("emergency_contact")
+        )
+
+        if not valid:
+            raise ValueError(message)
+
         if supabase:
 
             valid, message = (
@@ -98,7 +100,7 @@ class PatientService:
 
         payload = patient_data.copy()
 
-        payload["patient_id"] = patient_id
+        # payload["patient_id"] = patient_id
 
         height = payload.get("height_cm")
         weight = payload.get("weight_kg")
@@ -111,16 +113,13 @@ class PatientService:
             )
 
             payload["bmi"] = bmi_data["bmi"]
-            payload["bmi_category"] = (
-                bmi_data["category"]
-            )
+            payload["bmi_category"] = bmi_data["category"]
 
         return payload
 
     @staticmethod
     def register_patient(
         patient_data: dict,
-        sequence: int,
         supabase=None
     ) -> dict:
 
@@ -129,16 +128,10 @@ class PatientService:
             supabase=supabase
         )
 
-        patient_id = (
-            PatientService.generate_patient_id(
-                sequence
-            )
-        )
-
         payload = (
             PatientService.create_patient_payload(
                 patient_data,
-                patient_id
+                None
             )
         )
         PatientCreate(**payload)

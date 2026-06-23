@@ -10,5 +10,4 @@ class DatabaseService:
             return response.data
 
         except Exception as e:
-            print(f"Database Error: {e}")
-            return None
+            raise Exception(f"Database Error: {e}")

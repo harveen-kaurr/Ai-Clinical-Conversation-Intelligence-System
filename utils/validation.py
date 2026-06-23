@@ -63,6 +63,16 @@ def validate_age(
     )
 
 
+def validate_emergency_contact(
+    contact: Optional[str]
+) -> Tuple[bool, str]:
+
+    if not contact:
+        return True, ""
+
+    return validate_phone_number(contact)
+
+
 def validate_gender(
     gender: str
 ) -> Tuple[bool, str]:
@@ -121,7 +131,7 @@ def validate_duplicate_patient(
         query = (
             supabase
             .table("patients")
-            .select("id")
+            .select("patient_id")
             .eq(
                 "phone_number",
                 phone_number
@@ -129,8 +139,9 @@ def validate_duplicate_patient(
         )
 
         if exclude_id:
+
             query = query.neq(
-                "id",
+                "patient_id",
                 exclude_id
             )
 
