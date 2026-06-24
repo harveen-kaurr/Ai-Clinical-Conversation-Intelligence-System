@@ -40,6 +40,18 @@ from pages.delete_assessment import (
     show_delete_assessment_page
 )
 
+from pages.add_consultation import (
+    show_add_consultation_page
+)
+
+from pages.view_consultation import (
+    show_view_consultation_page
+)
+
+from pages.search_consultation import (
+    show_search_consultation_page
+)
+
 st.set_page_config(
     page_title="AI Clinical Intelligence System",
     layout="wide"
@@ -53,7 +65,8 @@ module = st.sidebar.selectbox(
     "Select Module",
     [
         "Patient Management",
-        "Pain Assessment"
+        "Pain Assessment",
+        "Consultation Management"
     ]
 )
 
@@ -70,7 +83,7 @@ if module == "Patient Management":
         ]
     )
 
-else:
+elif module == "Pain Assessment":
 
     page = st.sidebar.radio(
         "Select Action",
@@ -83,6 +96,16 @@ else:
         ]
     )
 
+else:
+
+    page = st.sidebar.radio(
+        "Select Action",
+        [
+            "Add Consultation",
+            "View Consultation",
+            "Search Consultation"
+        ]
+    )
 # Patient Pages
 
 if page == "Add Patient":
@@ -126,3 +149,17 @@ elif page == "Edit Assessment":
 elif page == "Delete Assessment":
 
     show_delete_assessment_page()
+
+#Consultation Page    
+
+elif page == "Add Consultation":
+
+    show_add_consultation_page() 
+
+elif page == "View Consultation":
+
+    show_view_consultation_page()  
+
+elif page == "Search Consultation":
+
+    show_search_consultation_page()         
