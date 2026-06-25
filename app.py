@@ -55,6 +55,8 @@ from pages.search_consultation import (
 from pages.add_treatment import show_add_treatment_page
 from pages.view_treatment import show_view_treatment_page
 from pages.search_treatment import show_search_treatment_page
+from pages.edit_treatment import show_edit_treatment_page
+from pages.delete_treatment import show_delete_treatment_page
 
 from pages.add_conversation import show_add_conversation_page
 from pages.view_conversation import show_view_conversation_page
@@ -228,7 +230,9 @@ elif module == "Treatment Management":
         [
             "Add Treatment",
             "View Treatment",
-            "Search Treatment"
+            "Search Treatment",
+            "Edit Treatment",
+            "Delete Treatment"
         ]
     )
 
@@ -332,6 +336,12 @@ elif page == "View Treatment":
 
 elif page == "Search Treatment":
     show_search_treatment_page()
+
+elif page == "Edit Treatment":
+    show_edit_treatment_page()
+
+elif page == "Delete Treatment":
+    show_delete_treatment_page()
 
 # Conversation Pages
 elif page == "Add Conversation":
