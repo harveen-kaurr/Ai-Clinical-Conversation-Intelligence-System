@@ -11,11 +11,14 @@ from services.patient_crud import (
 
 def show_add_patient_page():
 
-    st.header("Add Patient")
+    st.markdown('<h2 class="gradient-header">Add New Patient</h2>', unsafe_allow_html=True)
+    st.markdown('<p style="color:#64748b; margin-top:-10px; margin-bottom: 20px;">Complete the form below to register a new patient in the clinical intelligence database.</p>', unsafe_allow_html=True)
 
+    st.markdown('<div class="custom-card">', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
 
     with col1:
+        st.markdown("<h4 style='color:#1e3a8a; margin-top:0; border-bottom:2px solid #3b82f6; padding-bottom:5px;'>📋 Personal & Contact Info</h4>", unsafe_allow_html=True)
 
         patient_name = st.text_input(
             "Patient Name *"
@@ -46,7 +49,8 @@ def show_add_patient_page():
         )
 
         address = st.text_area(
-            "Address"
+            "Address",
+            height=100
         )
 
         date_of_birth = st.date_input(
@@ -54,6 +58,7 @@ def show_add_patient_page():
         )
 
     with col2:
+        st.markdown("<h4 style='color:#0d9488; margin-top:0; border-bottom:2px solid #0d9488; padding-bottom:5px;'>🏥 Clinical & Lifestyle Info</h4>", unsafe_allow_html=True)
 
         date_of_visiting = st.date_input(
             "Date of Visiting"
@@ -64,42 +69,48 @@ def show_add_patient_page():
         )
 
         disease = st.text_input(
-            "Disease"
+            "Primary Complaint / Disease"
         )
 
         disease_category = st.text_input(
             "Disease Category"
         )
 
-        height_cm = st.number_input(
-            "Height (cm)",
-            min_value=0.0
-        )
-
-        weight_kg = st.number_input(
-            "Weight (kg)",
-            min_value=0.0
-        )
+        subcol1, subcol2 = st.columns(2)
+        with subcol1:
+            height_cm = st.number_input(
+                "Height (cm)",
+                min_value=0.0
+            )
+        with subcol2:
+            weight_kg = st.number_input(
+                "Weight (kg)",
+                min_value=0.0
+            )
 
         emergency_contact = st.text_input(
-            "Emergency Contact"
+            "Emergency Contact (Phone)"
         )
 
         lifestyle = st.text_input(
-            "Lifestyle"
+            "Lifestyle (e.g. Sedentary, Active)"
         )
 
         smoking_alcohol = st.text_input(
-            "Smoking / Alcohol"
+            "Smoking / Alcohol Status"
         )
 
         previous_spine_injury = st.text_area(
-            "Previous Spine Injury"
+            "Previous Spine Injury / Notes",
+            height=100
         )
+    
+    st.markdown('</div>', unsafe_allow_html=True)
 
     submit = st.button(
         "Register Patient"
     )
+
 
     if submit:
 

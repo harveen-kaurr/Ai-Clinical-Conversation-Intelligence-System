@@ -52,12 +52,124 @@ from pages.search_consultation import (
     show_search_consultation_page
 )
 
+from pages.add_treatment import show_add_treatment_page
+from pages.view_treatment import show_view_treatment_page
+from pages.search_treatment import show_search_treatment_page
+
+from pages.add_conversation import show_add_conversation_page
+from pages.view_conversation import show_view_conversation_page
+from pages.search_conversation import show_search_conversation_page
+
+def inject_custom_css():
+    st.markdown("""
+    <style>
+    /* Hide Streamlit default sidebar page list */
+    div[data-testid="stSidebarNav"] {
+        display: none !important;
+    }
+    
+    /* Global styles */
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    
+    html, body, [class*="css"], .stApp {
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        background-color: #f8fafc;
+    }
+    
+    /* Premium card container styling */
+    .custom-card {
+        background: white;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        border: 1px solid #e2e8f0;
+        margin-bottom: 20px;
+    }
+    
+    .gradient-header {
+        background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+    }
+
+    .sidebar-header {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        padding: 15px;
+        border-radius: 8px;
+        color: white;
+        margin-bottom: 20px;
+        text-align: center;
+        border: 1px solid #334155;
+    }
+
+    .metric-card {
+        background: #ffffff;
+        border-left: 5px solid #0d9488;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        margin-bottom: 12px;
+    }
+    
+    /* Custom button styling */
+    .stButton>button {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 8px 20px !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3) !important;
+    }
+    
+    .stButton>button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 12px -1px rgba(59, 130, 246, 0.4) !important;
+        background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%) !important;
+    }
+
+    /* Warning/Delete Button Custom Styling */
+    div.stButton > button[data-baseweb="button"]:has(span:contains("Delete")), 
+    div.stButton > button[data-baseweb="button"]:has(span:contains("Confirm Delete")) {
+        background: linear-gradient(135deg, #dc2626 0%, #f87171 100%) !important;
+        box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3) !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 st.set_page_config(
     page_title="AI Clinical Intelligence System",
     layout="wide"
 )
 
-st.title("🏥 AI Clinical Intelligence System")
+inject_custom_css()
+
+# Sidebar branding header
+st.sidebar.markdown(
+    """
+    <div class="sidebar-header">
+        <h3 style="margin:0; font-weight:700;">🏥 AI Clinical</h3>
+        <p style="margin:0; font-size:0.8rem; opacity:0.8;">Intelligence Platform</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    """
+    <div style="background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%); padding: 25px; border-radius: 12px; color: white; margin-bottom: 25px;">
+        <h1 style="margin:0; font-weight:800; font-size: 2.2rem;">🏥 AI Clinical Intelligence System</h1>
+        <p style="margin: 5px 0 0 0; opacity:0.9; font-size:1.1rem;">Healthcare analytics and patient management platform with AI-driven intelligence</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 
 st.sidebar.title("Navigation")
 
@@ -66,7 +178,9 @@ module = st.sidebar.selectbox(
     [
         "Patient Management",
         "Pain Assessment",
-        "Consultation Management"
+        "Consultation Management",
+        "Treatment Management",
+        "Conversation Capture"
     ]
 )
 
@@ -96,7 +210,7 @@ elif module == "Pain Assessment":
         ]
     )
 
-else:
+elif module == "Consultation Management":
 
     page = st.sidebar.radio(
         "Select Action",
@@ -106,6 +220,51 @@ else:
             "Search Consultation"
         ]
     )
+
+elif module == "Treatment Management":
+
+    page = st.sidebar.radio(
+        "Select Action",
+        [
+            "Add Treatment",
+            "View Treatment",
+            "Search Treatment"
+        ]
+    )
+
+else:
+
+    page = st.sidebar.radio(
+        "Select Action",
+        [
+            "Add Conversation",
+            "View Conversation",
+            "Search Conversation"
+        ]
+    )
+
+
+# Render Sidebar Stats
+from services.patient_crud import get_all_patients
+try:
+    patients_data = get_all_patients()
+    total_pat = len(patients_data) if patients_data else 0
+except Exception:
+    total_pat = 0
+
+st.sidebar.markdown(f"""
+<div style="background: #1e293b; padding: 16px; border-radius: 8px; border: 1px solid #334155; margin-top: 30px; color: white;">
+    <h4 style="margin: 0 0 10px 0; font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; font-weight:700; letter-spacing: 0.5px;">System Stats</h4>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-size: 0.9rem; color: #cbd5e1;">Total Patients:</span>
+        <span style="font-weight: 700; color: #38bdf8; font-size: 1.1rem;">{total_pat}</span>
+    </div>
+    <div style="font-size: 0.75rem; color: #64748b; border-top: 1px solid #334155; padding-top: 8px; text-align: center;">
+        Database Status: <span style="color: #4ade80; font-weight:600;">CONNECTED</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 # Patient Pages
 
 if page == "Add Patient":
@@ -163,3 +322,23 @@ elif page == "View Consultation":
 elif page == "Search Consultation":
 
     show_search_consultation_page()         
+
+# Treatment Pages
+elif page == "Add Treatment":
+    show_add_treatment_page()
+
+elif page == "View Treatment":
+    show_view_treatment_page()
+
+elif page == "Search Treatment":
+    show_search_treatment_page()
+
+# Conversation Pages
+elif page == "Add Conversation":
+    show_add_conversation_page()
+
+elif page == "View Conversation":
+    show_view_conversation_page()
+
+elif page == "Search Conversation":
+    show_search_conversation_page()
