@@ -61,6 +61,8 @@ from pages.delete_treatment import show_delete_treatment_page
 from pages.add_conversation import show_add_conversation_page
 from pages.view_conversation import show_view_conversation_page
 from pages.search_conversation import show_search_conversation_page
+from pages.edit_conversation import show_edit_conversation_page
+from pages.delete_conversation import show_delete_conversation_page
 
 def inject_custom_css():
     st.markdown("""
@@ -243,7 +245,9 @@ else:
         [
             "Add Conversation",
             "View Conversation",
-            "Search Conversation"
+            "Search Conversation",
+            "Edit Conversation",
+            "Delete Conversation"
         ]
     )
 
@@ -351,4 +355,10 @@ elif page == "View Conversation":
     show_view_conversation_page()
 
 elif page == "Search Conversation":
-    show_search_conversation_page()
+    show_search_conversation_page()
+
+elif page == "Edit Conversation":
+    show_edit_conversation_page()
+
+elif page == "Delete Conversation":
+    show_delete_conversation_page()
