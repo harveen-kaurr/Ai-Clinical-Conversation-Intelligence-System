@@ -121,14 +121,14 @@ def show_add_consultation_page():
                 "consultation_time": str(consultation_time),
                 "chief_complaint": chief_complaint.strip(),
                 "clinical_findings": clinical_findings.strip() if clinical_findings.strip() else None,
-                "spine_exam": spine_exam.strip() if spine_exam.strip() else None,
-                "muscle_exam": muscle_exam.strip() if muscle_exam.strip() else None,
-                "nerve_exam": nerve_exam.strip() if nerve_exam.strip() else None,
-                "tissue_exam": tissue_exam.strip() if tissue_exam.strip() else None,
-                "bone_joint_exam": bone_joint_exam.strip() if bone_joint_exam.strip() else None,
+                "spine_examination": spine_exam.strip() if spine_exam.strip() else None,
+                "muscle_examination": muscle_exam.strip() if muscle_exam.strip() else None,
+                "nerve_examination": nerve_exam.strip() if nerve_exam.strip() else None,
+                "tissue_examination": tissue_exam.strip() if tissue_exam.strip() else None,
+                "bone_joint_examination": bone_joint_exam.strip() if bone_joint_exam.strip() else None,
                 "preliminary_diagnosis": preliminary_diagnosis.strip() if preliminary_diagnosis.strip() else None,
                 "recommended_scan": recommended_scan.strip() if recommended_scan.strip() else None,
-                "followup_date": str(followup_date) if followup_date else None
+                "follow_up_date": str(followup_date) if followup_date else None
             }
 
             payload = (
@@ -166,4 +166,4 @@ def show_add_consultation_page():
                 st.error("Failed to save consultation")
 
         except Exception as exc:
-            st.error(f"{type(exc).__name__}: {exc}")
+            st.error(f"{type(exc).__name__}: {exc}")
