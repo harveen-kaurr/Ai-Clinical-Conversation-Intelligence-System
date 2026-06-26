@@ -53,8 +53,13 @@ def show_add_patient_page():
             height=100
         )
 
+        import datetime
+        today = datetime.date.today()
         date_of_birth = st.date_input(
-            "Date of Birth"
+            "Date of Birth",
+            value=datetime.date(1990, 1, 1),
+            min_value=datetime.date(1900, 1, 1),
+            max_value=today
         )
 
     with col2:
