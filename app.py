@@ -52,6 +52,14 @@ from pages.search_consultation import (
     show_search_consultation_page
 )
 
+from pages.edit_consultation import (
+    show_edit_consultation_page
+)
+
+from pages.delete_consultation import (
+    show_delete_consultation_page
+)
+
 from pages.add_treatment import show_add_treatment_page
 from pages.view_treatment import show_view_treatment_page
 from pages.search_treatment import show_search_treatment_page
@@ -221,7 +229,9 @@ elif module == "Consultation Management":
         [
             "Add Consultation",
             "View Consultation",
-            "Search Consultation"
+            "Search Consultation",
+            "Edit Consultation",
+            "Delete Consultation"
         ]
     )
 
@@ -330,6 +340,14 @@ elif page == "View Consultation":
 elif page == "Search Consultation":
 
     show_search_consultation_page()         
+
+elif page == "Edit Consultation":
+
+    show_edit_consultation_page()
+
+elif page == "Delete Consultation":
+
+    show_delete_consultation_page()
 
 # Treatment Pages
 elif page == "Add Treatment":
