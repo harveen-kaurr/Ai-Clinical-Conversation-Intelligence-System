@@ -72,6 +72,12 @@ from pages.search_conversation import show_search_conversation_page
 from pages.edit_conversation import show_edit_conversation_page
 from pages.delete_conversation import show_delete_conversation_page
 
+from pages.add_progress import show_add_progress_page
+from pages.view_progress import show_view_progress_page
+from pages.search_progress import show_search_progress_page
+from pages.edit_progress import show_edit_progress_page
+from pages.delete_progress import show_delete_progress_page
+
 def inject_custom_css():
     st.markdown("""
     <style>
@@ -192,7 +198,8 @@ module = st.sidebar.selectbox(
         "Pain Assessment",
         "Consultation Management",
         "Treatment Management",
-        "Conversation Capture"
+        "Conversation Capture",
+        "Progress Management"
     ]
 )
 
@@ -247,9 +254,20 @@ elif module == "Treatment Management":
             "Delete Treatment"
         ]
     )
+elif module == "Progress Management":
 
-else:
+    page = st.sidebar.radio(
+        "Select Action",
+        [
+            "Add Progress",
+            "View Progress",
+            "Search Progress",
+            "Edit Progress",
+            "Delete Progress"
+        ]
+    )
 
+elif module == "Conversation Capture":
     page = st.sidebar.radio(
         "Select Action",
         [
@@ -380,3 +398,24 @@ elif page == "Edit Conversation":
 
 elif page == "Delete Conversation":
     show_delete_conversation_page()
+# Progress Pages
+
+elif page == "Add Progress":
+
+    show_add_progress_page()
+
+elif page == "View Progress":
+
+    show_view_progress_page()
+
+elif page == "Search Progress":
+
+    show_search_progress_page()
+
+elif page == "Edit Progress":
+
+    show_edit_progress_page()
+
+elif page == "Delete Progress":
+
+    show_delete_progress_page()
