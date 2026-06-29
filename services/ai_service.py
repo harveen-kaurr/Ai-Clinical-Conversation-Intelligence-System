@@ -2,8 +2,8 @@ from models.ai_analysis import (
     AIAnalysisCreate
 )
 
-from services.whisper_service import (
-    WhisperService
+from services.gemini_service import (
+    GeminiService
 )
 
 
@@ -13,7 +13,7 @@ class AIService:
 
         "conversation_id",
 
-        "audio_url"
+        "transcript"
 
     ]
 
@@ -39,13 +39,9 @@ class AIService:
         analysis_data: dict
     ) -> dict:
 
-        whisper_service = (
-            WhisperService()
-        )
-
-        transcript = (
-            whisper_service.transcribe_audio(
-                analysis_data["audio_url"]
+        ai_result = (
+            GeminiService.analyze_transcript(
+                analysis_data["transcript"]
             )
         )
 
@@ -55,37 +51,37 @@ class AIService:
                 analysis_data["conversation_id"],
 
             "transcript":
-                transcript,
+                analysis_data["transcript"],    
 
             "summary":
-                None,
+                ai_result["summary"],
 
             "extracted_symptoms":
-                None,
+                ai_result["extracted_symptoms"],
 
             "pain_keywords":
-                None,
+                ai_result["pain_keywords"],
 
             "emotional_state":
-                None,
+                ai_result["emotional_state"],
 
             "risk_level":
-                None,
+                ai_result["risk_level"],
 
             "surgery_probability":
-                None,
+                ai_result["surgery_probability"],
 
             "recovery_prediction":
-                None,
+                ai_result["recovery_prediction"],
 
             "ai_confidence":
-                None,
+                ai_result["ai_confidence"],
 
             "recommendations":
-                None,
+                ai_result["recommendations"],
 
             "structured_output":
-                None
+                ai_result["structured_output"]
 
         }
 

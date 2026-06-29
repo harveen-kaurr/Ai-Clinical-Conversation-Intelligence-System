@@ -3,6 +3,8 @@ from services.conversation_crud import create_conversation
 from services.conversation_service import ConversationService
 from services.audio_service import AudioService
 from services.whisper_service import WhisperService
+from services.ai_service import AIService
+from services.ai_crud import create_analysis
 
 
 def show_add_conversation_page():
@@ -223,6 +225,28 @@ def show_add_conversation_page():
                 )
 
             if created_conversation:
+
+                analysis_data = {
+
+                    "conversation_id":
+                        created_conversation[0]["conversation_id"],
+
+                    "transcript":
+                        conversation_data["raw_transcript"]
+
+                }
+
+                with st.spinner(
+                    "Generating AI analysis..."
+                ):
+
+                    analysis_payload = AIService.analyze_conversation(
+                        analysis_data
+                    )
+
+                    create_analysis(
+                        analysis_payload
+                    )
 
                 st.success(
                     "Conversation logs captured successfully!"
