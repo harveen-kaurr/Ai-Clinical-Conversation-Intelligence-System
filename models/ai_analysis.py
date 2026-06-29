@@ -8,6 +8,8 @@ class AIAnalysisBase(BaseModel):
 
     conversation_id: str
 
+    transcript: str | None = None
+
     summary: Optional[str] = None
 
     extracted_symptoms: Optional[str] = None

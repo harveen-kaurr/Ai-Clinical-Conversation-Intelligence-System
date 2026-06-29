@@ -11,7 +11,7 @@ class ConversationService:
 
         "source",
 
-        "raw_transcript"
+        "audio_file_url"
     ]
 
     @staticmethod

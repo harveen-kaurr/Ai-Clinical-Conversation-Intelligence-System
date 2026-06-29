@@ -11,7 +11,7 @@ class ConversationBase(BaseModel):
 
     audio_file_url: Optional[str] = None
 
-    raw_transcript: str
+    raw_transcript: Optional[str] = None
 
     language: Optional[str] = None
 

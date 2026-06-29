@@ -2,12 +2,18 @@ from models.ai_analysis import (
     AIAnalysisCreate
 )
 
+from services.whisper_service import (
+    WhisperService
+)
+
 
 class AIService:
 
     REQUIRED_FIELDS = [
 
-        "conversation_id"
+        "conversation_id",
+
+        "audio_url"
 
     ]
 
@@ -33,7 +39,55 @@ class AIService:
         analysis_data: dict
     ) -> dict:
 
-        payload = analysis_data.copy()
+        whisper_service = (
+            WhisperService()
+        )
+
+        transcript = (
+            whisper_service.transcribe_audio(
+                analysis_data["audio_url"]
+            )
+        )
+
+        payload = {
+
+            "conversation_id":
+                analysis_data["conversation_id"],
+
+            "transcript":
+                transcript,
+
+            "summary":
+                None,
+
+            "extracted_symptoms":
+                None,
+
+            "pain_keywords":
+                None,
+
+            "emotional_state":
+                None,
+
+            "risk_level":
+                None,
+
+            "surgery_probability":
+                None,
+
+            "recovery_prediction":
+                None,
+
+            "ai_confidence":
+                None,
+
+            "recommendations":
+                None,
+
+            "structured_output":
+                None
+
+        }
 
         return payload
 
