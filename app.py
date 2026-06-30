@@ -63,7 +63,20 @@ from pages.delete_consultation import (
 from pages.view_ai_analysis import (
     show_view_ai_analysis_page
 )
+from pages.generate_ai_analysis import (
+    show_generate_ai_analysis_page
+)
+from pages.generate_ai_analysis import (
+    show_generate_ai_analysis_page
+)
 
+from pages.search_ai_analysis import (
+    show_search_ai_analysis_page
+)
+
+from pages.ai_dashboard import (
+    show_ai_dashboard_page
+)
 
 from pages.add_treatment import show_add_treatment_page
 from pages.view_treatment import show_view_treatment_page
@@ -290,7 +303,10 @@ elif module == "AI Analysis":
     page = st.sidebar.radio(
         "Select Action",
         [
-            "View AI Analysis"
+            "Generate AI Analysis",
+            "View AI Analysis",
+            "Search AI Analysis",
+            "AI Dashboard"
         ]
     )    
 
@@ -437,7 +453,20 @@ elif page == "Delete Progress":
 
 #AI analysis page
 
+# AI Analysis Pages
+
+elif page == "Generate AI Analysis":
+
+    show_generate_ai_analysis_page()
+
 elif page == "View AI Analysis":
 
     show_view_ai_analysis_page()
 
+elif page == "Search AI Analysis":
+
+    show_search_ai_analysis_page()
+
+elif page == "AI Dashboard":
+
+    show_ai_dashboard_page()

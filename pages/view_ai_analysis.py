@@ -1,5 +1,5 @@
 import streamlit as st
-
+import json
 from services.ai_crud import (
     get_all_analysis
 )
@@ -86,51 +86,227 @@ def show_view_ai_analysis_page():
             with col1:
 
                 st.metric(
+
                     "Risk Level",
+
                     analysis.get(
                         "risk_level",
                         "N/A"
                     )
+
                 )
 
                 st.metric(
+
                     "Surgery Probability",
-                    f"{analysis.get('surgery_probability',0)}%"
+
+                    analysis.get(
+                        "surgery_probability",
+                        0
+                    )
+
                 )
 
             with col2:
 
                 st.metric(
+
                     "Recovery Prediction",
+
                     analysis.get(
                         "recovery_prediction",
                         "N/A"
                     )
+
                 )
 
                 st.metric(
+
                     "AI Confidence",
-                    f"{analysis.get('ai_confidence',0)}%"
+
+                    analysis.get(
+                        "ai_confidence",
+                        0
+                    )
+
                 )
 
             st.subheader(
                 "Recommendations"
             )
 
-            st.write(
+            st.info(
+
                 analysis.get(
                     "recommendations",
                     "N/A"
                 )
+
             )
+
+            structured = analysis.get(
+                "structured_output",
+                {}
+            )
+
+            if isinstance(
+                structured,
+                str
+            ):
+
+                structured = json.loads(
+                    structured
+                )
+
+            rules = structured.get(
+                "clinical_rules",
+                {}
+            )
+
+            prediction = structured.get(
+                "prediction_engine",
+                {}
+            )
+
+            st.divider()
 
             st.subheader(
-                "Structured Output"
+                "Clinical Rules"
             )
 
-            st.json(
-                analysis.get(
-                    "structured_output",
-                    {}
+            c1, c2 = st.columns(2)
+
+            with c1:
+
+                st.write(
+                    f"**Follow-up:** {rules.get('follow_up','N/A')}"
                 )
+
+                st.write(
+                    f"**Risk (Rule Engine):** {rules.get('rule_risk_level','N/A')}"
+                )
+
+                st.write(
+                    f"**Surgery Probability:** {rules.get('rule_surgery_probability','N/A')}"
+                )
+
+                st.write(
+                    f"**Recovery Prediction:** {rules.get('rule_recovery_prediction','N/A')}"
+                )
+
+            with c2:
+
+                st.write(
+                    "**Suggested Tests**"
+                )
+
+                for item in rules.get(
+                    "suggested_tests",
+                    []
+                ):
+
+                    st.success(item)
+
+            st.subheader(
+                "Recommended Therapy"
             )
+
+            therapy = rules.get(
+                "recommended_therapy",
+                []
+            )
+
+            if therapy:
+
+                cols = st.columns(2)
+
+                for i, item in enumerate(therapy):
+
+                    with cols[i % 2]:
+
+                        st.info(item)
+
+            st.subheader(
+                "Clinical Flags"
+            )
+
+            flags = rules.get(
+                "flags",
+                []
+            )
+
+            if flags:
+
+                cols = st.columns(3)
+
+                for i, item in enumerate(flags):
+
+                    with cols[i % 3]:
+
+                        st.warning(item)
+
+            st.divider()
+
+            st.subheader(
+                "Prediction Engine"
+            )
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+
+                st.metric(
+
+                    "Pain Level",
+
+                    prediction.get(
+                        "pain_level",
+                        "N/A"
+                    )
+
+                )
+
+                st.metric(
+
+                    "Patient Category",
+
+                    prediction.get(
+                        "patient_category",
+                        "N/A"
+                    )
+
+                )
+
+            with col2:
+
+                st.metric(
+
+                    "Therapy Priority",
+
+                    prediction.get(
+                        "therapy_priority",
+                        "N/A"
+                    )
+
+                )
+
+                st.metric(
+
+                    "Recovery Priority",
+
+                    prediction.get(
+                        "recovery_priority",
+                        "N/A"
+                    )
+
+                )
+
+            with st.expander(
+
+                "View Complete AI JSON"
+
+            ):
+
+                st.json(
+                    structured
+                )
