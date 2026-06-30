@@ -163,3 +163,34 @@ class ProgressAnalytics:
             return "Poor"
 
         return "Critical"
+    @staticmethod
+    def analytics_summary(progress_data: dict) -> dict:
+
+        pain = ProgressAnalytics.calculate_pain_improvement(
+            progress_data["previous_pain_score"],
+            progress_data["current_pain_score"]
+        )
+
+        score = ProgressAnalytics.overall_recovery_score(
+            progress_data
+        )
+
+        return {
+            "pain_improvement_percent": pain,
+            "mobility_status": ProgressAnalytics.mobility_status(
+                progress_data["mobility_improvement"]
+            ),
+            "sleep_status": ProgressAnalytics.sleep_status(
+                progress_data["sleep_quality"]
+            ),
+            "numbness_status": ProgressAnalytics.numbness_status(
+                progress_data["numbness_improvement"]
+            ),
+            "range_of_motion_status": ProgressAnalytics.rom_status(
+                progress_data["range_of_motion"]
+            ),
+            "overall_recovery_score": score,
+            "overall_recovery_status": ProgressAnalytics.overall_recovery_status(
+                score
+            )
+        }

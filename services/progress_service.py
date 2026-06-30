@@ -129,6 +129,23 @@ class ProgressService:
         return payload
 
     @staticmethod
+    def calculate_recovery_status(
+            progress_data: dict
+        ) -> str:
+
+            score = (
+                ProgressAnalytics.overall_recovery_score(
+                    progress_data
+                )
+            )
+
+            return (
+                ProgressAnalytics.overall_recovery_status(
+                    score
+                )
+            )    
+
+    @staticmethod
     def register_progress(
 
         progress_data: dict
