@@ -60,6 +60,11 @@ from pages.delete_consultation import (
     show_delete_consultation_page
 )
 
+from pages.view_ai_analysis import (
+    show_view_ai_analysis_page
+)
+
+
 from pages.add_treatment import show_add_treatment_page
 from pages.view_treatment import show_view_treatment_page
 from pages.search_treatment import show_search_treatment_page
@@ -199,7 +204,8 @@ module = st.sidebar.selectbox(
         "Consultation Management",
         "Treatment Management",
         "Conversation Capture",
-        "Progress Management"
+        "Progress Management",
+        "AI Analysis"
     ]
 )
 
@@ -278,6 +284,15 @@ elif module == "Conversation Capture":
             "Delete Conversation"
         ]
     )
+
+elif module == "AI Analysis":
+
+    page = st.sidebar.radio(
+        "Select Action",
+        [
+            "View AI Analysis"
+        ]
+    )    
 
 
 # Render Sidebar Stats
@@ -419,3 +434,10 @@ elif page == "Edit Progress":
 elif page == "Delete Progress":
 
     show_delete_progress_page()
+
+#AI analysis page
+
+elif page == "View AI Analysis":
+
+    show_view_ai_analysis_page()
+
