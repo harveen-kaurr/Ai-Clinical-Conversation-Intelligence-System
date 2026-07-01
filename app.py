@@ -1,5 +1,5 @@
 import streamlit as st
-
+from pages.dashboard import show_dashboard_page
 from pages.add_patient import (
     show_add_patient_page
 )
@@ -212,6 +212,7 @@ st.sidebar.title("Navigation")
 module = st.sidebar.selectbox(
     "Select Module",
     [
+        "Dashboard",
         "Patient Management",
         "Pain Assessment",
         "Consultation Management",
@@ -332,9 +333,11 @@ st.sidebar.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+if module == "Dashboard":
+    show_dashboard_page()
 # Patient Pages
 
-if page == "Add Patient":
+elif page == "Add Patient":
 
     show_add_patient_page()
 
