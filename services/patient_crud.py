@@ -103,3 +103,19 @@ def search_patient_by_patient_id(patient_id):
     )
 
     return DatabaseService.execute_query(query)
+
+def search_patient_by_disease(
+    disease: str
+):
+
+    query = (
+        supabase
+        .table("patients")
+        .select("*")
+        .ilike(
+            "disease",
+            f"%{disease}%"
+        )
+    )
+
+    return DatabaseService.execute_query(query)

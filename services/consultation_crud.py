@@ -87,3 +87,21 @@ def search_consultations(
         )
 
     return DatabaseService.execute_query(query)
+
+def search_consultation_by_id(
+    consultation_id: str
+):
+
+    query = (
+        supabase
+        .table(TABLE_NAME)
+        .select("*")
+        .eq(
+            "consultation_id",
+            consultation_id
+        )
+    )
+
+    return DatabaseService.execute_query(
+        query
+    )

@@ -473,3 +473,4 @@ elif page == "Search AI Analysis":
 elif page == "AI Dashboard":
 
     show_ai_dashboard_page()
+
