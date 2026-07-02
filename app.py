@@ -350,12 +350,19 @@ st.sidebar.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-if dashboard_page == "Overview":
-    show_dashboard_page()
-elif dashboard_page == "Conversation History":
-    show_conversation_history_dashboard()
-elif dashboard_page == "AI Analysis Dashboard":
-    show_ai_analysis_dashboard()
+if module == "Dashboard":
+
+    if dashboard_page == "Overview":
+
+        show_dashboard_page()
+
+    elif dashboard_page == "Conversation History":
+
+        show_conversation_history_dashboard()
+
+    elif dashboard_page == "AI Analysis Dashboard":
+
+        show_ai_analysis_dashboard()
 # Patient Pages
 
 elif page == "Add Patient":
