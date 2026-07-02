@@ -66,24 +66,13 @@ def show_search_patient_page():
         )
 
     with filter_col2:
-        risk_filter = st.selectbox(
-            "Risk Level",
-            ["All", "Low", "Medium", "High"]
-        )
-
-    with filter_col3:
-        therapy_filter = st.text_input("Therapy Type")
-
-    filter_col4, filter_col5 = st.columns(2)
-
-    with filter_col4:
         age_filter = st.number_input(
             "Age",
             min_value=0,
             value=0
         )
 
-    with filter_col5:
+    with filter_col3:
         visit_date = st.date_input(
             "Visit Date",
             value=None
