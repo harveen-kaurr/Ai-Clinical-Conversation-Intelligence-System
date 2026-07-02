@@ -72,9 +72,6 @@ from pages.view_ai_analysis import (
 from pages.generate_ai_analysis import (
     show_generate_ai_analysis_page
 )
-from pages.generate_ai_analysis import (
-    show_generate_ai_analysis_page
-)
 
 from pages.search_ai_analysis import (
     show_search_ai_analysis_page
@@ -82,6 +79,10 @@ from pages.search_ai_analysis import (
 
 from pages.ai_dashboard import (
     show_ai_dashboard_page
+)
+
+from pages.view_patient_profile import (
+    show_view_patient_profile_page
 )
 
 from pages.add_treatment import show_add_treatment_page
@@ -215,6 +216,9 @@ st.markdown(
 
 st.sidebar.title("Navigation")
 
+page = None
+dashboard_page = None
+
 module = st.sidebar.selectbox(
     "Select Module",
     [
@@ -225,7 +229,8 @@ module = st.sidebar.selectbox(
         "Treatment Management",
         "Conversation Capture",
         "Progress Management",
-        "AI Analysis"
+        "AI Analysis",
+        "View Patient Profile"
     ]
 )
 
@@ -363,6 +368,12 @@ if module == "Dashboard":
     elif dashboard_page == "AI Analysis Dashboard":
 
         show_ai_analysis_dashboard()
+
+elif module == "View Patient Profile":
+
+    show_view_patient_profile_page()
+
+
 # Patient Pages
 
 elif page == "Add Patient":
@@ -501,4 +512,5 @@ elif page == "Search AI Analysis":
 elif page == "AI Dashboard":
 
     show_ai_dashboard_page()
+
 
