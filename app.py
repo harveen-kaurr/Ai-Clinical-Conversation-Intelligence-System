@@ -1,4 +1,10 @@
 import streamlit as st
+from pages.ai_analysis_dashboard import (
+    show_ai_analysis_dashboard
+)
+from pages.conversation_history_dashboard import (
+    show_conversation_history_dashboard
+)
 from pages.dashboard import show_dashboard_page
 from pages.add_patient import (
     show_add_patient_page
@@ -223,7 +229,18 @@ module = st.sidebar.selectbox(
     ]
 )
 
-if module == "Patient Management":
+if module == "Dashboard":
+    dashboard_page = st.sidebar.radio(
+        "Dashboard",
+        [
+            "Overview",
+            "Conversation History",
+            "AI Analysis Dashboard"
+        ]
+    )
+
+
+elif module == "Patient Management":
 
     page = st.sidebar.radio(
         "Select Action",
@@ -333,8 +350,12 @@ st.sidebar.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-if module == "Dashboard":
+if dashboard_page == "Overview":
     show_dashboard_page()
+elif dashboard_page == "Conversation History":
+    show_conversation_history_dashboard()
+elif dashboard_page == "AI Analysis Dashboard":
+    show_ai_analysis_dashboard()
 # Patient Pages
 
 elif page == "Add Patient":
