@@ -6,12 +6,8 @@ from models.conversation import (
 class ConversationService:
 
     REQUIRED_FIELDS = [
-
         "consultation_id",
-
-        "source",
-
-        "audio_file_url"
+        "source"
     ]
 
     @staticmethod
@@ -19,6 +15,7 @@ class ConversationService:
         conversation_data: dict
     ) -> None:
 
+        # Validate common required fields
         for field in ConversationService.REQUIRED_FIELDS:
 
             if (
@@ -30,6 +27,19 @@ class ConversationService:
                 raise ValueError(
                     f"{field} is required"
                 )
+
+        # Require audio only when source is Audio Upload
+        if (
+            conversation_data.get("source") == "Audio Upload"
+            and (
+                "audio_file_url" not in conversation_data
+                or conversation_data["audio_file_url"] is None
+                or conversation_data["audio_file_url"] == ""
+            )
+        ):
+            raise ValueError(
+                "audio_file_url is required"
+            )
 
     @staticmethod
     def create_conversation_payload(

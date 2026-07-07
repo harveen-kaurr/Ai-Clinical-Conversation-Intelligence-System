@@ -4,11 +4,11 @@ from datetime import datetime
 
 
 class ConversationBase(BaseModel):
-
     consultation_id: str
 
     source: str
 
+    # Optional for manual transcript entries
     audio_file_url: Optional[str] = None
 
     raw_transcript: Optional[str] = None
@@ -29,7 +29,6 @@ class ConversationCreate(ConversationBase):
 
 
 class ConversationUpdate(BaseModel):
-
     source: Optional[str] = None
 
     audio_file_url: Optional[str] = None
@@ -48,11 +47,9 @@ class ConversationUpdate(BaseModel):
 
 
 class Conversation(ConversationBase):
-
     conversation_id: str
 
     created_at: datetime
 
     class Config:
-
         from_attributes = True
