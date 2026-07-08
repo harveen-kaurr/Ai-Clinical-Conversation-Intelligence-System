@@ -1,13 +1,21 @@
-import os
 import json
 
 from dotenv import load_dotenv
 from google import genai
 
+from utils.secrets import get_secret
+
 load_dotenv()
 
+GEMINI_API_KEY = get_secret("GEMINI_API_KEY")
+
+if not GEMINI_API_KEY:
+    raise ValueError(
+        "GEMINI_API_KEY must be set via .env (local) or Streamlit secrets (deployment)."
+    )
+
 client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
+    api_key=GEMINI_API_KEY
 )
 
 
