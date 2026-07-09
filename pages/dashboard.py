@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 from services.dashboard_service import (
     DashboardService
@@ -177,14 +178,23 @@ def show_dashboard_page():
 
     st.divider()
 
-    st.subheader(
-        "Analytics"
-    )
+    st.markdown("""
+### 📊 Power BI Clinical Analytics Dashboard
 
-    st.info(
-        "Power BI analytics dashboard will be integrated in Phase 7."
-    )
-
+<a href="https://app.powerbi.com/groups/me/reports/09ad6c79-6bd4-4f3c-838a-8038f68bb966/90b40ac04f4ca46c3e10?experience=power-bi"
+target="_blank">
+<button style="
+padding:12px 30px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;">
+Open Dashboard
+</button>
+</a>
+""", unsafe_allow_html=True)
     if "error" in dashboard:
 
         st.error(
