@@ -181,7 +181,7 @@ def show_dashboard_page():
     st.markdown("""
 ### 📊 Power BI Clinical Analytics Dashboard
 
-<a href="https://app.powerbi.com/groups/me/reports/09ad6c79-6bd4-4f3c-838a-8038f68bb966/90b40ac04f4ca46c3e10?experience=power-bi"
+<a href="https://app.powerbi.com/groups/me/reports/d772f056-8e72-44f2-9e5a-858f13b2751f/7f7e694044448ee16bd4?experience=power-bi"
 target="_blank">
 <button style="
 padding:12px 30px;
