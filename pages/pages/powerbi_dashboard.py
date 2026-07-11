@@ -13,7 +13,7 @@ st.markdown(
     "View the interactive Power BI analytics dashboard below."
 )
 
-POWERBI_URL = "https://app.powerbi.com/reportEmbed?reportId=d772f056-8e72-44f2-9e5a-858f13b2751f&autoAuth=true&ctid=1e959274-43b9-41b8-8b65-78f68452d398"
+POWERBI_URL = "https://app.powerbi.com/groups/me/reports/d772f056-8e72-44f2-9e5a-858f13b2751f/7f7e694044448ee16bd4?experience=power-bi"
 
 components.iframe(
     POWERBI_URL,
